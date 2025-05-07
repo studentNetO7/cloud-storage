@@ -1,0 +1,31 @@
+# Maven / Gradle
+target/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Spring Boot specific
+spring-boot-devtools.jar
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# Spring config files
+*.properties
+*.yml
