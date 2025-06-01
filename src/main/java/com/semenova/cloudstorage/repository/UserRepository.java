@@ -7,5 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
+
+      //Поиск пользователя по username (вход выполняется по email, равному username).
+
     Optional<User> findByUsername(String username);
-    }
+}

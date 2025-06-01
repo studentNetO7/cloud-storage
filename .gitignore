@@ -2,6 +2,11 @@
 target/
 build/
 
+# Storage folders
+/test-storage/
+/uploads/
+
+
 # IntelliJ IDEA
 .idea/
 *.iws
@@ -28,4 +33,4 @@ Thumbs.db
 
 # Spring config files
 *.properties
-*.yml
+

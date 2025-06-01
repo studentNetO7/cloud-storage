@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: cloud_db
+    restart: always
+    environment:
+      POSTGRES_DB: cloud_storage_docker_container
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: N8x#qLz92!rT
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+      - ./test-storage:/test-storage
+
+    networks:
+      - backend-net
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cloud_app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cloud_storage_docker_container
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: N8x#qLz92!rT
+      #SPRING_PROFILES_ACTIVE: test
+    ports:
+      - "8080:8080"
+    networks:
+      - backend-net
+
+volumes:
+  db_data:
+
+networks:
+  backend-net:
+    driver: bridge

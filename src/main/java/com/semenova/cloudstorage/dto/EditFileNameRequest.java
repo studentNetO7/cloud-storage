@@ -1,5 +1,10 @@
 package com.semenova.cloudstorage.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class EditFileNameRequest {
     private String filename;
 
@@ -10,11 +15,4 @@ public class EditFileNameRequest {
         this.filename = filename;
     }
 
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
 }

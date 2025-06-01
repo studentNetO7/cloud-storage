@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:8081")  // или порт, на котором у тебя запущен FRONT
+                .allowedOrigins("http://localhost:8081")  // порт, на котором запущен FRONT
                 .allowedMethods("*");
     }
 }

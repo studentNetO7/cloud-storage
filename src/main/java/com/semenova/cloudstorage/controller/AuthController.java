@@ -2,14 +2,21 @@ package com.semenova.cloudstorage.controller;
 
 import com.semenova.cloudstorage.dto.LoginRequest;
 import com.semenova.cloudstorage.dto.LoginResponse;
-import com.semenova.cloudstorage.dto.MessageResponse;
+import com.semenova.cloudstorage.security.TokenBlacklistService;
 import com.semenova.cloudstorage.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/cloud")
+@RequestMapping("")
 public class AuthController {
+    @Autowired
+    private TokenBlacklistService tokenBlacklistService;
 
     private final AuthService authService;
 
@@ -27,8 +34,15 @@ public class AuthController {
 
     // Метод для выхода пользователя из системы
     @PostMapping("/logout")
-    public ResponseEntity<MessageResponse> logout(@RequestHeader("auth-token") String token) {
-        authService.logout(token);
-        return ResponseEntity.ok(new MessageResponse("Successfully logged out"));
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String token = request.getHeader("auth-token");
+
+        if (token == null || token.isBlank()) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", "auth-token is missing"));
+        }
+
+        tokenBlacklistService.blacklistToken(token);
+        return ResponseEntity.ok(Map.of("message", "Logout successful"));
     }
 }

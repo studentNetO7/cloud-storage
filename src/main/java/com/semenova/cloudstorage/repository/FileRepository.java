@@ -10,5 +10,6 @@ import java.util.UUID;
 
 public interface FileRepository extends JpaRepository<File, UUID> {
     List<File> findByUserAndIsDeletedFalse(User user);
+
     Optional<File> findByFilenameAndUserAndIsDeletedFalse(String filename, User user);
 }

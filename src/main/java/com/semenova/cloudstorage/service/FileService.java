@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface FileService {
 
-
-
     void uploadFile(String token, String filename, MultipartFile file);
 
     void deleteFile(String token, String filename);
@@ -20,5 +18,5 @@ public interface FileService {
 
     void editFileName(String token, String oldFilename, String newFilename);
 
-    List<FileResponse> listFiles(String token, int limit);  // 🔄 Добавлен правильный метод
+    List<FileResponse> listFiles(String token, int limit);
 }

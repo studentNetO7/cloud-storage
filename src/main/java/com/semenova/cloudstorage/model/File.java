@@ -1,6 +1,9 @@
 package com.semenova.cloudstorage.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -8,22 +11,34 @@ import java.util.UUID;
 @Table(name = "files")
 public class File {
 
+    @Setter
+    @Getter
     @Id
     private UUID id;
 
+    @Setter
+    @Getter
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String filename;
 
+    @Setter
+    @Getter
     @Column(nullable = false)
     private long size;
 
+    @Getter
+    @Setter
     @Column(name = "upload_date")
     private LocalDateTime uploadDate;
 
+    @Getter
+    @Setter
     @Column(nullable = false)
     private String path;
 
@@ -35,61 +50,12 @@ public class File {
         if (id == null) id = UUID.randomUUID();
         if (uploadDate == null) uploadDate = LocalDateTime.now();
     }
-// Геттеры и сеттеры
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    public LocalDateTime getUploadDate() {
-        return uploadDate;
-    }
-
-    public void setUploadDate(LocalDateTime uploadDate) {
-        this.uploadDate = uploadDate;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Boolean getIsDeleted() {
+    public boolean getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(Boolean isDeleted) {
+    public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 }

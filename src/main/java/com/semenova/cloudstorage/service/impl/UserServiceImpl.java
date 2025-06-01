@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -38,7 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean authenticate(String username, String rawPassword) {
-        Optional<User> userOpt = userRepository.findByUsername(username);
+        Optional<User> userOpt = findByUsername(username); // переиспользование метода выше
+
         if (userOpt.isEmpty()) {
             logger.warn("Authentication failed: user '{}' not found", username);
             return false;
