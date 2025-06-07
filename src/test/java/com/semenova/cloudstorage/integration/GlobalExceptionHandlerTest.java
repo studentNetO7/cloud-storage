@@ -62,6 +62,6 @@ class GlobalExceptionHandlerTest extends BaseIntegrationTest {
                         .header("auth-token", authToken))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.message").value("Error upload file"));
+                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.startsWith("Internal server error")));
     }
 }

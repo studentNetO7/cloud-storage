@@ -102,7 +102,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<MessageResponse> handleRuntimeException(RuntimeException ex) {
         logger.error("RuntimeException occurred: {}", ex.getMessage(), ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new MessageResponse("Error upload file"));
+                .body(new MessageResponse("Internal server error: " + ex.getMessage()));
     }
 
     /**

@@ -57,9 +57,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
                 if (blacklisted) {
                     logger.warn("auth-token is blacklisted");
+                    response.setContentType("application/json");
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    String json = "{\"message\": \"Unauthorized error\", \"id\": 0}";
+                    response.getWriter().write(json);
                     return;
                 }
+
             }
         } else {
             logger.debug("No auth-token header present in request");

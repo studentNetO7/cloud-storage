@@ -1,6 +1,7 @@
 spring:
   datasource:
     url: jdbc:postgresql://db:5432/cloud_storage_docker_container
+    #url: jdbc:postgresql://localhost:5432/cloud_storage
     username: postgres
     password: N8x#qLz92!rT
     driver-class-name: org.postgresql.Driver
